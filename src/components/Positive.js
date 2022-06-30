@@ -43,57 +43,29 @@ export default function LoginScreen(){
     }
     
     return(
+        <>
+        <Header>
+            <h1>Nova Entrada</h1>     
+            <ion-icon name="log-out-outline"></ion-icon>
+        </Header>
         <Container>
-            <Logo>MyWallet</Logo>
             {isLoading ? (
                 <Form background={"#f2f2f2"} color={"#afafaf"}>
-                    <input disabled type="email" id="email" value={email} placeholder="E-mail" required onChange={(e)=>setEmail(e.target.value)} />
-                    <input disabled type="password" id="password" value={password} placeholder="Senha" required onChange={(e)=>setPassword(e.target.value)} />
+                    <input disabled type="email" id="email" value={email} placeholder="Valor" required onChange={(e)=>setEmail(e.target.value)} />
+                    <input disabled type="password" id="password" value={password} placeholder="Descrição" required onChange={(e)=>setPassword(e.target.value)} />
                     <button type="submit" disabled opacity={0.7}>{<ThreeDots color={"#ffffff"} width={51} />}</button>
                 </Form>
                  ) : ( 
                 <Form background={"#ffffff"} color={"#000000"} onSubmit={Login}>
-                    <input type="email" id="email" value={email} placeholder="E-mail" required onChange={(e)=>setEmail(e.target.value)} />
-                    <input type="password" id="password" value={password} placeholder="Senha" required onChange={(e)=>setPassword(e.target.value)} />
-                    <button type="submit" >Entrar</button>
+                    <input type="email" id="email" value={email} placeholder="Valor" required onChange={(e)=>setEmail(e.target.value)} />
+                    <input type="password" id="password" value={password} placeholder="Descrição" required onChange={(e)=>setPassword(e.target.value)} />
+                    <button type="submit">Enviar entrada</button>
                 </Form>
             )}
-            <Link to='/cadastro'>Primeira vez? Cadastre-se!</Link>
         </Container>
+        </>
     )
 }
-const Logo=styled.h1`
-    font-family: 'Saira Stencil One';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 32px;
-    line-height: 50px;
-    margin-bottom: 35px;
-    color: #FFFFFF;
-`
-const Container=styled.div`
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    width: 100%;
-    margin-top: 100px;
-    background-color: #8C11BE;
-    font-family: 'Raleway';
-
-    a{
-        margin-top: 20px;
-        font-family: 'Raleway';
-        font-style: normal;
-        font-weight: 700;
-        font-size: 15px;
-        line-height: 18px;
-        text-align: center;
-        text-decoration: none;
-
-        color: #FFFFFF;
-    }
-
-`
 const Form = styled.form`
     display: flex;
     flex-direction: column;
@@ -145,4 +117,50 @@ const Form = styled.form`
             text-decoration: none;
         }
     }
+`
+const Header=styled.div`
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 70px;
+    background-color:#8C11BE ;
+    justify-content: space-between;
+    position:fixed;
+    top:0;
+    right:0;
+    h1{
+        margin:18px; 
+        font-family: 'Raleway';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 26px;
+        line-height: 31px;
+        color: #FFFFFF;
+    }
+    ion-icon{
+        color:white;
+        margin:18px;
+        width: 30px;
+        height: 51px;
+        border-radius: 98.5px;
+    }
+
+`
+const Container=styled.div`
+display: flex;
+align-items: center;
+justify-content: center;
+margin-top: 80px;
+justify-content: space-between;
+width: 90%;
+font-family: 'Lexend Deca', sans-serif;
+h1{
+    font-family: 'Lexend Deca';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 22.976px;
+    line-height: 29px;
+
+    color: #8C11BE;
+}
 `

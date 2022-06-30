@@ -1,15 +1,15 @@
 import {React,useEffect,useState,useContext} from "react";
 import styled from 'styled-components';
-import Header from "./Header";
-import Footer from "./Footer";
 import dayjs from "dayjs";
 import locale from  "dayjs/locale/pt-br";
 import axios from "axios";
-import TodayHabit from "./TodayHabit";
 import UserContext from "../context/UserContext";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Today(){
-  
+
+    const navigate = useNavigate();
+
     const [habits,setHabits]=useState([]);
     
     const { user , setUser} = useContext(UserContext);
@@ -72,20 +72,23 @@ export default function Today(){
 
     const day = now.format("dddd");
     const Day = day.charAt(0).toUpperCase() + day.slice(1);
-
+    
     return(
         <>
-        <Header/>
+        <Header>
+            <h1>Olá, Fulano</h1>     
+            <ion-icon name="log-out-outline"></ion-icon>
+        </Header>
         <Page>
-            <Register></Register>
+            <Register><Data>{now.format("DD/MM")}</Data>  {Day}</Register>
             <Container>
-            <Button>
+            <Button onClick={()=>navigate("/adicionar")}>
                 <Column>
                     <ion-icon name="add-circle-outline"></ion-icon>
                     <Text>Nova entrada</Text>
                 </Column>
             </Button>
-            <Button>
+            <Button onClick={()=>navigate("/remover")}>
                 <Column>
                     <ion-icon name="remove-circle-outline"></ion-icon>
                     <Text>Nova saída</Text>
@@ -111,6 +114,42 @@ export default function Today(){
     //     </>
     // )
 }
+const Header=styled.div`
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 70px;
+    background-color:#8C11BE ;
+    justify-content: space-between;
+    position:fixed;
+    top:0;
+    right:0;
+    h1{
+        margin:18px; 
+        font-family: 'Raleway';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 26px;
+        line-height: 31px;
+        color: #FFFFFF;
+    }
+    ion-icon{
+        color:white;
+        margin:18px;
+        width: 30px;
+        height: 51px;
+        border-radius: 98.5px;
+    }
+
+`
+const Data=styled.h1`font-family: 'Raleway';
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 19px;
+
+color: #C6C6C6;
+`
 const Button=styled.button`
         font-family: 'Raleway';
         font-weight: 700;
