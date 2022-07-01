@@ -1,6 +1,5 @@
 import {React,useState} from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-//import Header from "./Header";
 import Login from "./Login";
 import SignUp from "./SignUp";
 import Positive from "./Positive"
@@ -13,7 +12,6 @@ export default function App(){
     return(
         <UserContext.Provider value={{ user, setUser }}>
         <BrowserRouter>
-            {/* <Header/> */}
             <Routes>
                 <Route path="/" element={<Login/>} />
                 <Route path="/cadastro" element={<SignUp/>} />

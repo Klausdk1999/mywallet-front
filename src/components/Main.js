@@ -18,29 +18,16 @@ export default function Today(){
  
     const now = dayjs().locale("pt-br");
 
-    function loadHabits(){
+    function loadTransactions(){
         const config = {
             headers: {
               Authorization: `Bearer ${token}`
             }
         };
 
-        const promise = axios.get(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today`,config);
+        const promise = axios.get(`http://localhost:5000/transactions`,config);
     
         promise.then(resposta => {
-            nDone=0;
-            for(let i=0;i<resposta.data.length;i++){
-                if(resposta.data[i].done){
-                    nDone++;
-                }
-            }
-            setUser(
-                {   
-                    image: user.image,
-                    token: user.token,
-                    percentage: (nDone/resposta.data.length)*100
-                },
-            );
             setHabits(resposta.data);
         });
         
@@ -48,31 +35,12 @@ export default function Today(){
     let nDone=0;
     let txtcolor="#BABABA";
     let percent;
-    let txt=countDone();
-    
-    function countDone(){
-        
-        for(let i=0;i<habits.length;i++){
-            if(habits[i].done){
-                nDone++;
-            }
-        }
-        if(nDone===0){
-            return "Nenhum hábito concluído ainda";
-        }else{
-            txtcolor="#8FC549";
-            return `${(nDone/habits.length*100).toFixed(0)}% dos hábitos concluídos`;
-        }
-    }
 
     useEffect(() => {
-        loadHabits();
+        loadTransactions();
         
     }, []);
 
-    const day = now.format("dddd");
-    const Day = day.charAt(0).toUpperCase() + day.slice(1);
-    
     return(
         <>
         <Header>
@@ -80,7 +48,11 @@ export default function Today(){
             <ion-icon name="log-out-outline"></ion-icon>
         </Header>
         <Page>
-            <Register><Data>{now.format("DD/MM")}</Data>  {Day}</Register>
+            <Register>
+                {habits.map((habit) => (
+                    <>{habit.date}{habit.description}{habit.type}{habit.value}</>
+                ))}
+            </Register>
             <Container>
             <Button onClick={()=>navigate("/adicionar")}>
                 <Column>
@@ -98,21 +70,7 @@ export default function Today(){
         </Page>
         </>
     )
-    // return(
-    //     <>
-    //     <Header/>
-    //     <Page>
-    //         <Container> <h1>{Day}, {now.format("DD/MM/YYYY")} </h1> </Container>
-    //         <Container> <Text color={txtcolor}>{txt}</Text> </Container>
-    //         <Column>
-    //             {habits.map((habit) => (
-    //                 <TodayHabit loadHabits={loadHabits} habit={habit} token={token} key={habit.id}/>
-    //             ))}
-    //         </Column>
-    //     </Page>
-    //     <Footer percent={percent}/>
-    //     </>
-    // )
+    
 }
 const Header=styled.div`
     display: flex;

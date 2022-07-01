@@ -23,8 +23,9 @@ export default function LoginScreen(){
             email,
             password
         }
+        console.log(process.env.API_URI);
 
-        const promise=axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login",postLogin);
+        const promise=axios.post(`http://localhost:5000/login`,postLogin);
 
         promise.then(resposta => {
             setEmail("");
@@ -33,9 +34,7 @@ export default function LoginScreen(){
             console.log(resposta.data);
             setUser(
                 {   
-                    image: resposta.data.image,
                     token: resposta.data.token,
-                    percentage: 0
                 },
             );
             navigate("/principal");

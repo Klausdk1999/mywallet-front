@@ -1,15 +1,15 @@
 import React,{ useState } from "react";
 import styled from "styled-components";
 import axios from 'axios';
-import { Link, useNavigate } from "react-router-dom";
-import logo from "./media/MyWallet.png" 
+import { Link, useNavigate } from "react-router-dom"; 
+import dotenv from 'dotenv';
 
 export default function SignUp() {
-
+  dotenv.config();
   let navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
-  const [image, setImage] = useState("");
+  const [passwordConfirmation, setpasswordConfirmation] = useState("");
   const [password, setPassword] = useState("");
 
   function submitData(event) {
@@ -20,14 +20,15 @@ export default function SignUp() {
             email ,
             password,
             name,
-            image
+            passwordConfirmation
         };
     
-    const promise=axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up",postObject);
+    const promise=axios.post(`http://localhost:5000/cadastrar`,postObject);
 
     promise.then(resposta => {
         setEmail("");
-        setImage("");
+        setName("");
+        setpasswordConfirmation("");
         setPassword("");
         navigate("/");
         console.log(resposta.data);
@@ -42,9 +43,9 @@ export default function SignUp() {
         <Form onSubmit={submitData}>
             <input type="text" placeholder="E-mail" onChange={(e) => setEmail(e.target.value)} value={email}/>
             <input type="text" placeholder="Nome" onChange={(e) => setName(e.target.value)} value={name} />
-            <input type="text" placeholder="Foto" onChange={(e) => setImage(e.target.value)} value={image}/>
-            <input type="text"  placeholder="Senha" onChange={(e) => setPassword(e.target.value)} value={password} />
-            <button type="submit" >Cadastrar</button>
+            <input type="text" placeholder="Senha" onChange={(e) => setPassword(e.target.value)} value={password}/>
+            <input type="text"  placeholder="Confirme sua senha" onChange={(e) => setpasswordConfirmation(e.target.value)} value={passwordConfirmation} />
+            <button type="submit">Cadastrar</button>
         </Form>
         <Link to='/'>Já tem uma conta? Entre agora!</Link>
       </Container>
