@@ -37,6 +37,19 @@ export default function Today(){
         loadTransactions();
         
     }, []);
+    let balance=0;
+    calcBalance();
+    function calcBalance(){
+        for(let i=0;i<transactions.length;i++){
+            if(transactions[i].type==="positive"){
+                console.log(transactions[i]);
+                balance+=Number(transactions[i].value);
+            }else{
+                balance-=Number(transactions[i].value);
+            }
+            console.log(balance);
+        }
+    }
 
     return(
         <>
@@ -46,32 +59,38 @@ export default function Today(){
         </Header>
         <Page>
             <Register>
+                <Column>
                 {transactions.map((transaction) => transaction.type==="positive"?(
-                    <Container><Data>{transaction.date}</Data>{transaction.description}<h3>{transaction.value}</h3></Container>
+                    <Container><Row><Data>{transaction.date}</Data>{transaction.description}</Row><h3>R$ {transaction.value}</h3></Container>
                 ):(
-                    <Container><Data>{transaction.date}</Data>{transaction.description}<h2>{transaction.value}</h2></Container>
+                    <Container><Row><Data>{transaction.date}</Data>{transaction.description}</Row><h2>R$ {transaction.value}</h2></Container>
                 ))}
+                </Column>
+                <Container><strong>SALDO</strong><>R$ {balance}</></Container>
             </Register>
             <Container>
-            <Button onClick={()=>navigate("/adicionar")}>
-                <Column>
-                    <ion-icon name="add-circle-outline"></ion-icon>
-                    <Text>Nova entrada</Text>
-                </Column>
-            </Button>
-            <Button onClick={()=>navigate("/remover")}>
-                <Column>
-                    <ion-icon name="remove-circle-outline"></ion-icon>
-                    <Text>Nova saída</Text>
-                </Column>
-            </Button>
+                <Button onClick={()=>navigate("/adicionar")}>
+                    <Column>
+                        <ion-icon name="add-circle-outline"></ion-icon>
+                        <Text>Nova entrada</Text>
+                    </Column>
+                </Button>
+                <Button onClick={()=>navigate("/remover")}>
+                    <Column>
+                        <ion-icon name="remove-circle-outline"></ion-icon>
+                        <Text>Nova saída</Text>
+                    </Column>
+                </Button>
             </Container>
         </Page>
         </>
     )
     
 }
+const Row=styled.div`
+display: flex;
 
+`
 const Header=styled.div`
     display: flex;
     align-items: center;
@@ -79,9 +98,6 @@ const Header=styled.div`
     height: 70px;
     background-color:#8C11BE ;
     justify-content: space-between;
-    position:fixed;
-    top:0;
-    right:0;
     h1{
         margin:18px; 
         font-family: 'Raleway';
@@ -105,7 +121,7 @@ font-style: normal;
 font-weight: 400;
 font-size: 16px;
 line-height: 19px;
-
+margin-right: 10px;
 color: #C6C6C6;
 `
 const Button=styled.button`
@@ -113,7 +129,6 @@ const Button=styled.button`
         font-weight: 700;
         width: 155px;
         height: 114px;
-        margin: auto;
         text-align: center;
         background-color: #A328D6;
         color: #FFFFFF;
@@ -121,6 +136,7 @@ const Button=styled.button`
         border: none;
         border-radius: 5px;
         display: flex;
+        margin:7px;
         justify-content: center;
         align-items: center;
         a{
@@ -130,10 +146,11 @@ const Button=styled.button`
 const Column=styled.div`
     display: flex;
     flex-direction: column;
-    align-items: center;
-    width: 95%;
-    margin-top: 20px;
-    margin-bottom: 35px;
+    align-items: center ;
+    justify-content: start;
+    width: 100%;
+    margin-top: 5px;
+    margin-bottom: 5px;
 `
 const Text=styled.div`
     font-family: 'Raleway';
@@ -145,8 +162,7 @@ const Text=styled.div`
     color: #FFFFFF;
 `
 const Page=styled.div`
-    margin-top:70px;
-    margin-bottom:70px;
+    margin-bottom: 10px;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
@@ -159,25 +175,29 @@ const Register=styled.div`
     display: flex;
     align-items: center;
     flex-direction: column;
+    justify-content: space-between;
     margin-top: 10px;
     width: 90%;
-    height: 85%;
+    height: 80%;
     background-color: white;
     border-radius: 5px;
+    padding-bottom:10px;
 `
 const Container=styled.div`
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    justify-content: center;
-    margin-top: 15px;
     justify-content: space-between;
-    width: 90%;
+    margin-top: 15px;
+    min-width: 70vw;
+    width: 95%;
     font-family: 'Raleway';
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
     line-height: 19px;
     text-align: left;
+
     h2{
         text-align: right;
         color: #C70000;
