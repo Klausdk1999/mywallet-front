@@ -49,7 +49,7 @@ export default function LoginScreen(){
         <>
         <Header>
             <h1>Nova Saída</h1>     
-            <ion-icon name="log-out-outline"></ion-icon>
+            <ion-icon onClick={()=>navigate("/principal")} name="arrow-back-circle-outline"></ion-icon>
         </Header>
         <Container>
             {isLoading ? (

@@ -10,11 +10,11 @@ export default function Today(){
 
     const navigate = useNavigate();
 
-    const [habits,setHabits]=useState([]);
+    const [transactions,setTransactions]=useState([]);
     
     const { user , setUser} = useContext(UserContext);
     
-    const {image,token} = user;
+    const {name,token} = user;
  
     const now = dayjs().locale("pt-br");
 
@@ -28,13 +28,10 @@ export default function Today(){
         const promise = axios.get(`http://localhost:5000/transactions`,config);
     
         promise.then(resposta => {
-            setHabits(resposta.data);
+            setTransactions(resposta.data);
         });
         
     }
-    let nDone=0;
-    let txtcolor="#BABABA";
-    let percent;
 
     useEffect(() => {
         loadTransactions();
@@ -44,13 +41,15 @@ export default function Today(){
     return(
         <>
         <Header>
-            <h1>Olá, Fulano</h1>     
-            <ion-icon name="log-out-outline"></ion-icon>
+            <h1>Olá, {name}</h1>     
+            <ion-icon onClick={()=>navigate("/")} name="log-out-outline"></ion-icon>
         </Header>
         <Page>
             <Register>
-                {habits.map((habit) => (
-                    <>{habit.date}{habit.description}{habit.type}{habit.value}</>
+                {transactions.map((transaction) => transaction.type==="positive"?(
+                    <Container><Data>{transaction.date}</Data>{transaction.description}<h3>{transaction.value}</h3></Container>
+                ):(
+                    <Container><Data>{transaction.date}</Data>{transaction.description}<h2>{transaction.value}</h2></Container>
                 ))}
             </Register>
             <Container>
@@ -72,6 +71,7 @@ export default function Today(){
     )
     
 }
+
 const Header=styled.div`
     display: flex;
     align-items: center;
@@ -152,13 +152,16 @@ const Page=styled.div`
     flex-direction: column;
     align-items: center;
     width: 100%;
-    height: calc(100vh - 140px);
+    height: calc(100vh - 80px);
     overflow-x: scroll;
 `
 const Register=styled.div`
-    margin-top: 80px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 10px;
     width: 90%;
-    height: 60%;
+    height: 85%;
     background-color: white;
     border-radius: 5px;
 `
@@ -169,14 +172,18 @@ const Container=styled.div`
     margin-top: 15px;
     justify-content: space-between;
     width: 90%;
-    font-family: 'Lexend Deca', sans-serif;
-    h1{
-        font-family: 'Lexend Deca';
-        font-style: normal;
-        font-weight: 400;
-        font-size: 22.976px;
-        line-height: 29px;
-
-        color: #126BA5;
+    font-family: 'Raleway';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    text-align: left;
+    h2{
+        text-align: right;
+        color: #C70000;
+    }
+    h3{
+        text-align: right;
+        color: #03AC00;
     }
 `
