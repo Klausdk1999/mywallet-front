@@ -25,7 +25,7 @@ export default function Today(){
             }
         };
 
-        const promise = axios.get(`http://localhost:5000/transactions`,config);
+        const promise = axios.get(`https://api-mywallet-klaus.herokuapp.com/transactions`,config);
     
         promise.then(resposta => {
             setTransactions(resposta.data);
