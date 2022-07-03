@@ -25,7 +25,7 @@ export default function LoginScreen(){
         }
         console.log(process.env.API_URI);
 
-        const promise=axios.post(`http://localhost:5000/login`,postLogin);
+        const promise=axios.post(`https://git.heroku.com/api-mywallet-klaus.git/login`,postLogin);
 
         promise.then(resposta => {
             setEmail("");

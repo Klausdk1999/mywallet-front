@@ -35,7 +35,7 @@ export default function LoginScreen(){
             date:now.format("DD/MM/YY")
         }
 
-        const promise=axios.post(`http://localhost:5000/transaction`,postTransaction,config);
+        const promise=axios.post(`https://git.heroku.com/api-mywallet-klaus.git/transaction`,postTransaction,config);
 
         promise.then(resposta => {
             setValue("");
