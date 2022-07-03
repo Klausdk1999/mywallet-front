@@ -58,15 +58,21 @@ export default function Today(){
             <ion-icon onClick={()=>navigate("/")} name="log-out-outline"></ion-icon>
         </Header>
         <Page>
+           
             <Register>
-                <Column>
+                {transactions.length>0?
+                <><Column>
                 {transactions.map((transaction) => transaction.type==="positive"?(
                     <Container><Row><Data>{transaction.date}</Data>{transaction.description}</Row><h3>R$ {transaction.value}</h3></Container>
                 ):(
                     <Container><Row><Data>{transaction.date}</Data>{transaction.description}</Row><h2>R$ {transaction.value}</h2></Container>
                 ))}
                 </Column>
-                <Container><strong>SALDO</strong><>R$ {balance}</></Container>
+                <Container><strong>SALDO</strong><>R$ {balance}</></Container></>
+                :
+                <>
+                <Container><Data>Não há registros de entrada ou saída</Data></Container>
+                </>}
             </Register>
             <Container>
                 <Button onClick={()=>navigate("/adicionar")}>
