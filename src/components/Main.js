@@ -71,7 +71,7 @@ export default function Today(){
                 <Container><strong>SALDO</strong><>R$ {balance}</></Container></>
                 :
                 <>
-                <Container><Data>Não há registros de entrada ou saída</Data></Container>
+                <Container><Data><strong>Não há registros de entrada ou saída</strong></Data></Container>
                 </>}
             </Register>
             <Container>
