@@ -1,7 +1,7 @@
-# Getting Started with Create React App
+# MyWallet
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
+Web application to help the user with expense control. Full-stack project, with front-end in React, back-end with NodeJs, and MongoDb as Database!
+Access it : https://projeto13-mywallet-chi.vercel.app/
 ## Available Scripts
 
 In the project directory, you can run:
