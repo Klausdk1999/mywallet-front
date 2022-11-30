@@ -5,6 +5,9 @@ import {React, useContext, useState } from 'react';
 import UserContext from "../context/UserContext";
 import { ThreeDots } from  'react-loader-spinner';
 import logo from "./media/MyWallet.png"; 
+import dotenv from 'dotenv'
+
+dotenv.config();
 
 export default function LoginScreen(){
     
@@ -23,9 +26,9 @@ export default function LoginScreen(){
             email,
             password
         }
-        console.log(process.env.API_URI);
+        
 
-        const promise=axios.post(`https://api-mywallet-klaus.herokuapp.com/login`,postLogin);
+        const promise=axios.post(process.env.API_URI+`/login`,postLogin);
 
         promise.then(resposta => {
             setEmail("");

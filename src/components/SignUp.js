@@ -23,7 +23,7 @@ export default function SignUp() {
             passwordConfirmation
         };
     
-    const promise=axios.post(`https://api-mywallet-klaus.herokuapp.com/cadastrar`,postObject);
+    const promise=axios.post(process.env.API_URI+`/cadastrar`,postObject);
 
     promise.then(resposta => {
         setEmail("");

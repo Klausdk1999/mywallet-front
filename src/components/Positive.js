@@ -5,6 +5,9 @@ import {React, useContext, useState } from 'react';
 import UserContext from "../context/UserContext";
 import { ThreeDots } from  'react-loader-spinner';
 import dayjs from "dayjs";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 export default function LoginScreen(){
 
@@ -35,7 +38,7 @@ export default function LoginScreen(){
             date:now.format("DD/MM/YY")
         }
 
-        const promise=axios.post(`https://api-mywallet-klaus.herokuapp.com/transaction`,postTransaction,config);
+        const promise=axios.post(process.env.API_URI+`/transaction`,postTransaction,config);
 
         promise.then(resposta => {
             setValue("");

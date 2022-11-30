@@ -5,6 +5,9 @@ import locale from  "dayjs/locale/pt-br";
 import axios from "axios";
 import UserContext from "../context/UserContext";
 import { Link, useNavigate } from "react-router-dom";
+import dotenv from 'dotenv'
+
+dotenv.config();
 
 export default function Today(){
 
@@ -25,7 +28,7 @@ export default function Today(){
             }
         };
 
-        const promise = axios.get(`https://api-mywallet-klaus.herokuapp.com/transactions`,config);
+        const promise = axios.get(process.env.API_URI+`/transaction`,config);
     
         promise.then(resposta => {
             setTransactions(resposta.data);
