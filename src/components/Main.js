@@ -28,7 +28,7 @@ export default function Today(){
             }
         };
 
-        const promise = axios.get(process.env.API_URI+`/transaction`,config);
+        const promise = axios.get(process.env.REACT_APP_BACK_URL+`/transaction`,config);
     
         promise.then(resposta => {
             setTransactions(resposta.data);

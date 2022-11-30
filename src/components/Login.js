@@ -5,7 +5,7 @@ import {React, useContext, useState } from 'react';
 import UserContext from "../context/UserContext";
 import { ThreeDots } from  'react-loader-spinner';
 import logo from "./media/MyWallet.png"; 
-import dotenv from 'dotenv'
+import dotenv from 'dotenv';
 
 dotenv.config();
 
@@ -27,8 +27,8 @@ export default function LoginScreen(){
             password
         }
         
-
-        const promise=axios.post(process.env.API_URI+`/login`,postLogin);
+        console.log(process.env.REACT_APP_BACK_URL)
+        const promise=axios.post(process.env.REACT_APP_BACK_URL+`/login`,postLogin);
 
         promise.then(resposta => {
             setEmail("");

@@ -37,7 +37,7 @@ export default function LoginScreen(){
             date:now.format("DD/MM/YY")
         }
 
-        const promise=axios.post(process.env.API_URI+`/transaction`,postTransaction,config);
+        const promise=axios.post(process.env.REACT_APP_BACK_URL+`/transaction`,postTransaction,config);
 
         promise.then(resposta => {
             setValue("");

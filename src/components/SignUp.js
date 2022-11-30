@@ -23,7 +23,7 @@ export default function SignUp() {
             passwordConfirmation
         };
     
-    const promise=axios.post(process.env.API_URI+`/cadastrar`,postObject);
+    const promise=axios.post(process.env.REACT_APP_BACK_URL+`/cadastrar`,postObject);
 
     promise.then(resposta => {
         setEmail("");
