@@ -28,6 +28,7 @@ export default function LoginScreen(){
         }
         
         console.log(process.env.REACT_APP_BACK_URL)
+        
         const promise=axios.post(process.env.REACT_APP_BACK_URL+`/login`,postLogin);
 
         promise.then(resposta => {
