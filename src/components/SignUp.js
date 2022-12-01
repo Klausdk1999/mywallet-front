@@ -33,6 +33,10 @@ export default function SignUp() {
         navigate("/");
         console.log(resposta.data);
     });
+    promise.catch((error) => {
+        alert("Falha ao fazer cadastro");
+        console.log(error.message)
+      });
   }
 
   return (

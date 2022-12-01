@@ -26,8 +26,6 @@ export default function LoginScreen() {
       password,
     };
 
-    console.log(process.env.REACT_APP_BACK_URL);
-
     const promise = axios.post(
       process.env.REACT_APP_BACK_URL + `/login`,
       postLogin
@@ -44,7 +42,8 @@ export default function LoginScreen() {
       navigate("/principal");
     });
     promise.catch((error) => {
-      alert(error.message);
+      alert("Falha ao fazer login");
+      console.log(error.message)
       setPassword("");
       setIsLoading(false);
     });
