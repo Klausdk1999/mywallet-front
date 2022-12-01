@@ -35,7 +35,6 @@ export default function LoginScreen(){
             setEmail("");
             setPassword("");
             setIsLoading(false);
-            console.log(resposta.data);
             setUser(
                 {   
                     name: resposta.data.name,
@@ -44,6 +43,7 @@ export default function LoginScreen(){
             );
             navigate("/principal");
         });
+        promise.catch(error => alert(error.message))
     }
     
     return(
